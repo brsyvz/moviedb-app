@@ -1,0 +1,36 @@
+.scroll-top-btn {
+    display: inline-block;
+    background-color: #707cb4;
+    color: white;
+    width: 35px;
+    height: 35px;
+    text-align: center;
+    border-radius: 4px;
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    -webkit-transition: background-color 0.3s, opacity 0.5s, visibility 0.5s;
+    -o-transition: background-color 0.3s, opacity 0.5s, visibility 0.5s;
+    transition: background-color 0.3s, opacity 0.5s, visibility 0.5s;
+    opacity: 0;
+    visibility: hidden;
+    z-index: 1000;
+    padding-top: 7px;
+  }
+  
+  .scroll-top-btn > i {
+    font-size: 20px;
+  }
+  
+  .scroll-top-btn:hover {
+    cursor: pointer;
+    background-color: #333;
+  }
+  .scroll-top-btn:active {
+    background-color: #555;
+  }
+  .scroll-top-btn.show {
+    opacity: 1;
+    visibility: visible;
+  }
+  

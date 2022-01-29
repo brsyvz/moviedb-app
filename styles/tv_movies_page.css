@@ -1,0 +1,121 @@
+:root {
+  --title-fnt-size: 24px;
+  --title-clr: #e7e7e7;
+  --summary-fnt-size: 14px;
+  --summary-clr: #9b9b9b;
+  --content-title-fnt-size: 14px;
+  --content-title-clr: #e7e7e7;
+  --year-clr: #818181;
+  --year-fnt-size: 14px;
+  --font-w400: 400;
+  --genre-clr: #818181;
+  --genre-fnt-size: 14px;
+  --rating-bg-clr: #707cb4;
+  --rating-txt-clr: #fff;
+  --rating-fnt-size: 18px;
+}
+
+h3 {
+  margin-top: 134px;
+  margin-bottom: 20px;
+  font-size: 30px;
+  text-align: center;
+  color: #707cb4;
+}
+
+.wrapper {
+  display: flex;
+  flex-direction: row;
+  width: 1230px;
+  flex-wrap: wrap;
+}
+.container {
+  display: flex;
+  margin: auto;
+  /* box-shadow: 0 1.25em 1em -0.5em #0005; */
+  width: 600px;
+  margin-top: 25px;
+  background-color: #1e1b26;
+  box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px,
+    rgba(0, 0, 0, 0.22) 0px 15px 12px;
+  border-radius: 4px;
+  height: auto;
+  position: relative;
+}
+
+.infoDivRight {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+}
+
+.container > img {
+  border-radius: 4px;
+
+  -webkit-mask-image: linear-gradient(to left, transparent 3%, #1e1b26 60%);
+  mask-image: linear-gradient(to left, transparent 3%, #1e1b26 60%);
+}
+
+li {
+  list-style-type: none;
+  padding: 8px;
+}
+
+.rating {
+  position: absolute;
+  top: 0;
+  left: 0;
+  border-top-left-radius: 4px;
+  height: 50px;
+  width: 50px;
+  background-color: var(--rating-bg-clr);
+  display: flex;
+  color: var(--rating-txt-clr);
+  align-items: center;
+  justify-content: center;
+  font-size: var(--rating-fnt-size);
+  border-bottom-right-radius: 15px;
+  border-top-left-radius: 4px;
+}
+
+.movieTitle {
+  font-size: var(--title-fnt-size);
+  line-height: 30px;
+  font-weight: 600;
+  color: var(--title-clr);
+  margin-top: 16px;
+}
+
+.contentTitle {
+  color: var(--content-title-clr);
+  font-size: var(--content-title-fnt-size);
+  font-weight: var(--font-w400);
+  line-height: 14px;
+  margin: 0;
+  display: block;
+  margin-bottom: 6px;
+}
+
+.summary,
+.cast,
+.companies {
+  font-size: 14px;
+  font-weight: var(--font-w400);
+  line-height: 16px;
+  color: var(--summary-clr);
+}
+
+.releaseYear {
+  color: var(--year-clr);
+  font-size: var(--year-fnt-size);
+  font-weight: var(--font-w400);
+  position: absolute;
+  right: 5px;
+  top: 0;
+}
+
+.genre {
+  color: var(--genre-clr);
+  font-size: var(--genre-fnt-size);
+  font-weight: var(--font-w400);
+}

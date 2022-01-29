@@ -1,0 +1,223 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap');
+
+/* GLOBAL STYLES */
+html {
+  scroll-behavior: smooth;
+}
+
+:root {
+  --line-height: 20px;
+  --fs-small: 16px;
+  --fs-medium: 25px;
+  --white-clr: #fff;
+}
+
+body {
+  font-family: 'Montserrat', sans-serif;
+  position: relative;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* HEADER SECTION */
+header {
+  /* 1320w 590h */
+  background-image: url(../images/header_bg.png);
+  width: 1320px;
+  height: 590px;
+  margin: auto;
+  margin-top: 60px;
+}
+
+.navbar {
+  position: absolute;
+  top: 0;
+  width: 1230px;
+  margin: 45px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0.63) 0%,
+    rgba(255, 255, 255, 0) 100%
+  );
+  backdrop-filter: blur(25px);
+  height: 50px;
+  border-radius: 4px;
+}
+
+.logo {
+  font-size: var(--fs-medium);
+  margin-left: 23px;
+  line-height: 30.48px;
+}
+
+.navLinks a {
+  margin-left: 28px;
+  font-size: var(--fs-small);
+  line-height: var(--line-height);
+  text-decoration: none;
+  color: #707cb4;
+  transition: 0.1s ease-in;
+}
+
+.navLinks a:hover {
+  color: rgba(255, 255, 255, 0.952);
+}
+
+.headerHeroSection {
+  position: absolute;
+  top: 105px;
+  width: 1230px;
+  margin: 24px 45px 0 45px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.heroCard {
+  width: 238px;
+  height: 417px;
+  filter: drop-shadow(0px 0px 25px rgba(0, 0, 0, 0.57));
+  border-radius: 4px 0px 4px 4px;
+}
+
+.heroCard > img {
+  width: 238px;
+  height: 383px;
+  border-radius: 2px;
+  margin-top: 35px;
+}
+.heroCard > span {
+  border-radius: 2px;
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 93px;
+  height: 35px;
+  padding: 7px 17px;
+  color: #111827;
+  background-color: var(--white-clr);
+  font-weight: bold;
+  font-size: var(--fs-small);
+  line-height: var(--line-height);
+  text-align: center;
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+}
+
+.titleBlock {
+  width: 100%;
+  position: absolute;
+  bottom: -1px;
+  height: 93px;
+  background: rgba(0, 0, 0, 0.69);
+  backdrop-filter: blur(4px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.titleBlock > p {
+  padding: 0 22px;
+  font-weight: 400;
+  font-size: var(--fs-small);
+  text-align: center;
+  line-height: var(--line-height);
+  color: var(--white-clr);
+}
+
+.heroText {
+  color: var(--white-clr);
+  text-align: center;
+}
+
+.heroText p {
+  font-weight: 400;
+  font-size: var(--fs-medium);
+  line-height: 30px;
+  margin-bottom: 8px;
+}
+
+.heroText h1 {
+  font-weight: bold;
+  font-size: var(--fs-medium);
+  line-height: 30px;
+}
+/* HOMEPAGE --> MOVIES & TV SECTION */
+main {
+  width: 1230px;
+  margin: auto;
+}
+
+h2 {
+  margin-top: 134px;
+  font-weight: bold;
+  font-size: var(--fs-medium);
+  line-height: 30px;
+}
+
+.cardItem.heroCard > span {
+  color: var(--white-clr);
+  background-color: #24123a;
+}
+
+.movieSection,
+.tvSection {
+  margin: auto;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 25px;
+}
+
+.cardItem {
+  box-shadow: rgba(33, 35, 38, 0.1) 0px 10px 10px -10px;
+  margin-top: 45px;
+  filter: drop-shadow(0px 0px 25px rgba(0, 0, 0, 0.2));
+  border-radius: 4px 0px 4px 4px;
+}
+
+.cardItem-title {
+  background: rgba(36, 18, 58, 0.76);
+}
+
+/* FOOTER */
+footer {
+  width: 100%;
+  height: 75px;
+  background-color: #24123a;
+  margin-top: 134px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+footer > a {
+  color: white;
+  margin-left: 104px;
+  text-decoration: none;
+  font-size: 18px;
+  line-height: 22px;
+}
+
+footer .contactLinks {
+  display: flex;
+}
+
+footer .contactLinks * {
+  font-size: var(--fs-small);
+  line-height: 20px;
+  margin-left: 28px;
+  list-style-type: none;
+  color: white;
+  text-decoration: none;
+}
+footer .contactLinks > li:last-child {
+  margin-right: 104px;
+}
+
+/* SCROLL TO TOP BUTTON */
