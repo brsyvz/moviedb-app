@@ -4,12 +4,6 @@ function renderHomepage() {
   const movieSection = document.querySelector('.movieSection');
   const tvSection = document.querySelector('.tvSection');
 
-  const homeLink = document.querySelector('#homeLink');
-  homeLink.addEventListener('click', (e) => {
-    e.preventDefault();
-    location.reload();
-  });
-
   const moviesUrl =
     'https://api.themoviedb.org/3/movie/popular?api_key=569ccf1a5cbb5c6658fdd087c1f05771&language=en-US&page=1';
 
@@ -58,7 +52,7 @@ function renderHomepage() {
           headerHeroLeft.innerHTML = `
         <img src="${imgUrl + poster_path}" alt="${title}" />
         <span>${vote_average} / 10</span>
-        <div class="titleBlock">
+        <div class="titleBox">
           <p>${title}</p>
         </div>
       `;
@@ -66,7 +60,7 @@ function renderHomepage() {
           headerHeroRight.innerHTML = `
         <img src="${imgUrl + poster_path}" alt="${name}" />
         <span>${vote_average} / 10</span>
-        <div class="titleBlock">
+        <div class="titleBox">
           <p>${name}</p>
         </div>
       `;
@@ -80,15 +74,15 @@ function renderHomepage() {
       data.map((list) => {
         const { name, poster_path, vote_average, title } = list;
         const card = document.createElement('div');
-        card.classList.add('cardItem', 'heroCard');
+        card.classList.add('card', 'mainCard');
         card.innerHTML = ` 
       <img src="${imgUrl + poster_path}" alt="${name || title}" />
-      <span>${vote_average} / 10</span>
-      <div class="titleBlock cardItem-title">
+      <span class="mainCard-rating">${vote_average} / 10</span>
+      <div class="titleBox mainCard-title">
         <p>${name || title}</p>
       </div>
     `;
-        // if fetched json has "title" key, then it is a movie data.
+        // if fetched json has "title" key, then it is a movie data
         list.title ? movieSection.append(card) : tvSection.append(card);
       });
     }
