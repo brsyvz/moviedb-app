@@ -1,47 +1,39 @@
 function renderTvMoviesPage() {
-  const main = document.querySelector('main');
-  const wrapper = document.createElement('div');
-  wrapper.className = 'wrapper';
+  const main = document.querySelector('.mainContent');
   let sectionHeader = document.createElement('h3');
-  const tvLink = document.getElementById('tvLink');
-  const moviesLink = document.getElementById('moviesLink');
-  tvLink.addEventListener('click', renderPopularTvSeries);
-  moviesLink.addEventListener('click', renderPopularMovies);
-  const moviesUrl =
-    'https://api.themoviedb.org/3/movie/popular?api_key=569ccf1a5cbb5c6658fdd087c1f05771&language=en-US&page=1';
-
-  const tvSeriesUrl =
-    'https://api.themoviedb.org/3/tv/popular?api_key=569ccf1a5cbb5c6658fdd087c1f05771&language=en-US&page=1';
-
+  sectionHeader.className = 'sectionHeader';
   const imgUrl = 'https://image.tmdb.org/t/p/w300/';
 
-  let currentUrl = '';
-  let type = '';
+  // "movie" or "tv"
+  let urlExtension = '';
 
-  function renderPopularTvSeries(e) {
+  const navLinks = document.querySelector('.navLinks');
+  navLinks.addEventListener('click', (e) => {
     e.preventDefault();
-    currentUrl = tvSeriesUrl;
-    type = 'tv';
-    clearMainContent();
-    renderFetchedContent();
-  }
 
-  function renderPopularMovies(e) {
-    e.preventDefault();
-    currentUrl = moviesUrl;
-    type = 'movie';
-    clearMainContent();
-    renderFetchedContent();
-  }
+    let target = e.target.id;
+
+    if (target === 'tvLink') {
+      urlExtension = 'tv';
+    }
+    if (target === 'moviesLink') {
+      urlExtension = 'movie';
+    }
+
+    if (target === 'tvLink' || target === 'moviesLink') {
+      clearMainContent();
+      renderFetchedContent();
+    }
+  });
 
   function clearMainContent() {
     main.innerHTML = '';
-    wrapper.innerHTML = '';
     main.append(sectionHeader);
-    main.append(wrapper);
   }
 
   function renderFetchedContent() {
+    let currentUrl = `https://api.themoviedb.org/3/${urlExtension}/popular?api_key=569ccf1a5cbb5c6658fdd087c1f05771&language=en-US&page=1`;
+
     async function fetchMovieOrTvData(url) {
       const res = await fetch(url);
       const data = await res.json();
@@ -68,11 +60,11 @@ function renderTvMoviesPage() {
         // request for extracting extra movie details by using each movie id
         // extracts genres, cast and  production companies
         fetch(
-          `https://api.themoviedb.org/3/${type}/${id}?api_key=569ccf1a5cbb5c6658fdd087c1f05771&language=en-US&append_to_response=credits`
+          `https://api.themoviedb.org/3/${urlExtension}/${id}?api_key=569ccf1a5cbb5c6658fdd087c1f05771&language=en-US&append_to_response=credits`
         )
           .then((response) => response.json())
           .then((data) => {
-            type === 'movie'
+            urlExtension === 'movie'
               ? (sectionHeader.textContent = 'Popular Movies')
               : (sectionHeader.textContent = 'Popular TV Series');
 
@@ -89,12 +81,12 @@ function renderTvMoviesPage() {
               companies += data.production_companies[i].name + ', ';
             }
 
-            const movieContainer = document.createElement('div');
-            movieContainer.className = 'container';
-            movieContainer.innerHTML = `
+            const cardContainer = document.createElement('div');
+            cardContainer.className = 'container';
+            cardContainer.innerHTML = `
             <img src="${imgUrl + poster_path}" alt="${title || name}"/>
-             <ul class="infoDivRight">
-              <li class="movieTitle">${title || name}</li>
+             <ul class="infoDiv">
+              <li class="cardTitle">${title || name}</li>
               <li class="rating">${vote_average}</li>
               <li class="releaseYear">${
                 release_date
@@ -102,16 +94,18 @@ function renderTvMoviesPage() {
                   : release_date || first_air_date.slice(0, 4)
               }
               </li>
-              <li class="genre"><span class="contentTitle">Genre</span>${genres}</li>
+              <li class="genre"><span class="contentTitles">Genre</span>${genres}</li>
               <li class="summary">
-              <span class="contentTitle">Summary</span>${
-                overview || 'summary information is not found.'
+              <span class="contentTitles">Summary</span>${
+                overview || 'information not found.'
               }</li>
-              <li class="cast"><span class="contentTitle">Cast</span>${castMembers}</li>
-              <li class="companies"><span class="contentTitle">Producer</span>${companies || "producer information is not found."}</li>
+              <li class="cast"><span class="contentTitles">Cast</span>${castMembers}</li>
+              <li class="companies"><span class="contentTitles">Producer</span>${
+                companies || 'information not found'
+              }</li>
             </ul>`;
 
-            wrapper.append(movieContainer);
+            main.append(cardContainer);
             window.scrollTo(0, 750);
           })
           .catch((error) => {
@@ -119,10 +113,7 @@ function renderTvMoviesPage() {
           });
       });
     }
-
-    currentUrl === moviesUrl
-      ? fetchMovieOrTvData(moviesUrl)
-      : fetchMovieOrTvData(tvSeriesUrl);
+    fetchMovieOrTvData(currentUrl);
   }
 }
 renderTvMoviesPage();
