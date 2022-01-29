@@ -108,7 +108,7 @@ function renderTvMoviesPage() {
                 overview || 'summary information is not found.'
               }</li>
               <li class="cast"><span class="contentTitle">Cast</span>${castMembers}</li>
-              <li class="companies"><span class="contentTitle">Producer</span>${companies}</li>
+              <li class="companies"><span class="contentTitle">Producer</span>${companies || "producer information is not found."}</li>
             </ul>`;
 
             wrapper.append(movieContainer);
