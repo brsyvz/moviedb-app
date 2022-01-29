@@ -1,64 +1,92 @@
 :root {
-  --title-fnt-size: 24px;
-  --title-clr: #e7e7e7;
-  --summary-fnt-size: 14px;
-  --summary-clr: #9b9b9b;
-  --content-title-fnt-size: 14px;
-  --content-title-clr: #e7e7e7;
-  --year-clr: #818181;
-  --year-fnt-size: 14px;
-  --font-w400: 400;
-  --genre-clr: #818181;
-  --genre-fnt-size: 14px;
   --rating-bg-clr: #707cb4;
   --rating-txt-clr: #fff;
-  --rating-fnt-size: 18px;
+  --card-bg-clr: #190027;
+  --header-clr: #1a0029;
+  --card-info-title-txt-clr: #707cb4;
+  --card-info-txt-clr: #a59aac;
+  --card-info-title-size: 14px;
+  --card-info-size: 16px;
 }
 
-h3 {
-  margin-top: 134px;
-  margin-bottom: 20px;
-  font-size: 30px;
-  text-align: center;
-  color: #707cb4;
-}
-
-.wrapper {
+.mainContent.active {
   display: flex;
   flex-direction: row;
   width: 1230px;
   flex-wrap: wrap;
 }
+
+.sectionHeader {
+  margin-top: 134px;
+  margin-bottom: 20px;
+  font-size: 25px;
+  text-align: left;
+  color: var(--header-clr);
+  flex-wrap: wrap;
+  width: 100%;
+}
+
 .container {
   display: flex;
   margin: auto;
-  /* box-shadow: 0 1.25em 1em -0.5em #0005; */
   width: 600px;
   margin-top: 25px;
-  background-color: #1e1b26;
-  box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px,
-    rgba(0, 0, 0, 0.22) 0px 15px 12px;
+  background-color: var(--card-bg-clr);
+  box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px,
+    rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
   border-radius: 4px;
   height: auto;
   position: relative;
 }
 
-.infoDivRight {
+.container img {
+  border-radius: 4px;
+  -webkit-mask-image: linear-gradient(
+    to left,
+    transparent 3%,
+    var(--card-bg-clr) 60%
+  );
+  mask-image: linear-gradient(to left, transparent 3%, var(--card-bg-clr) 60%);
+}
+
+.container li {
+  list-style-type: none;
+  padding: 6px 0;
+}
+
+.infoDiv {
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
 }
 
-.container > img {
-  border-radius: 4px;
-
-  -webkit-mask-image: linear-gradient(to left, transparent 3%, #1e1b26 60%);
-  mask-image: linear-gradient(to left, transparent 3%, #1e1b26 60%);
+.cardTitle {
+  font-size: 26px;
+  line-height: 30px;
+  font-weight: 600;
+  color: var(--card-info-title-txt-clr);
+  margin-top: 16px;
 }
 
-li {
-  list-style-type: none;
-  padding: 8px;
+.contentTitles {
+  color: var(--card-info-title-txt-clr);
+  font-size: var(--card-info-title-size);
+  font-weight: 500;
+  line-height: 14px;
+  margin: 0;
+  display: block;
+  margin-bottom: 6px;
+}
+
+.summary,
+.cast,
+.companies,
+.releaseYear,
+.genre {
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 16px;
+  color: var(--card-info-txt-clr);
 }
 
 .rating {
@@ -73,49 +101,12 @@ li {
   color: var(--rating-txt-clr);
   align-items: center;
   justify-content: center;
-  font-size: var(--rating-fnt-size);
+  font-size: 18px;
   border-bottom-right-radius: 15px;
   border-top-left-radius: 4px;
 }
-
-.movieTitle {
-  font-size: var(--title-fnt-size);
-  line-height: 30px;
-  font-weight: 600;
-  color: var(--title-clr);
-  margin-top: 16px;
-}
-
-.contentTitle {
-  color: var(--content-title-clr);
-  font-size: var(--content-title-fnt-size);
-  font-weight: var(--font-w400);
-  line-height: 14px;
-  margin: 0;
-  display: block;
-  margin-bottom: 6px;
-}
-
-.summary,
-.cast,
-.companies {
-  font-size: 14px;
-  font-weight: var(--font-w400);
-  line-height: 16px;
-  color: var(--summary-clr);
-}
-
 .releaseYear {
-  color: var(--year-clr);
-  font-size: var(--year-fnt-size);
-  font-weight: var(--font-w400);
   position: absolute;
-  right: 5px;
-  top: 0;
-}
-
-.genre {
-  color: var(--genre-clr);
-  font-size: var(--genre-fnt-size);
-  font-weight: var(--font-w400);
+  right: 10px;
+  top: 6px;
 }
