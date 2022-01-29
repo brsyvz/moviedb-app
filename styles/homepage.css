@@ -10,11 +10,11 @@ html {
   --fs-small: 16px;
   --fs-medium: 25px;
   --white-clr: #fff;
+  --link-clr: #707cb4;
 }
 
 body {
   font-family: 'Montserrat', sans-serif;
-  position: relative;
 }
 
 * {
@@ -23,21 +23,27 @@ body {
   padding: 0;
 }
 
+.wrapper {
+  max-width: 1440px;
+  margin: auto;
+}
+
 /* HEADER SECTION */
 header {
-  /* 1320w 590h */
-  background-image: url(../images/header_bg.png);
+  margin: 60px;
+  background-image: url('../images/header_bg.png');
+  overflow: hidden;
   width: 1320px;
   height: 590px;
-  margin: auto;
-  margin-top: 60px;
+}
+
+#header,
+.navbar,
+.headerHeroSection {
+  margin: 45px;
 }
 
 .navbar {
-  position: absolute;
-  top: 0;
-  width: 1230px;
-  margin: 45px;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -51,18 +57,16 @@ header {
   border-radius: 4px;
 }
 
-.logo {
+.navbar .logo {
   font-size: var(--fs-medium);
-  margin-left: 23px;
-  line-height: 30.48px;
+  padding-left: 23px;
 }
 
 .navLinks a {
-  margin-left: 28px;
+  padding-left: 28px;
   font-size: var(--fs-small);
-  line-height: var(--line-height);
   text-decoration: none;
-  color: #707cb4;
+  color: var(--link-clr);
   transition: 0.1s ease-in;
 }
 
@@ -71,28 +75,24 @@ header {
 }
 
 .headerHeroSection {
-  position: absolute;
-  top: 105px;
-  width: 1230px;
-  margin: 24px 45px 0 45px;
   display: flex;
   justify-content: space-between;
 }
 
-.heroCard {
+.card {
   width: 238px;
   height: 417px;
   filter: drop-shadow(0px 0px 25px rgba(0, 0, 0, 0.57));
   border-radius: 4px 0px 4px 4px;
 }
 
-.heroCard > img {
+.card img {
   width: 238px;
   height: 383px;
   border-radius: 2px;
   margin-top: 35px;
 }
-.heroCard > span {
+.card span {
   border-radius: 2px;
   position: absolute;
   top: 0;
@@ -109,7 +109,7 @@ header {
   box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
 }
 
-.titleBlock {
+.card .titleBox {
   width: 100%;
   position: absolute;
   bottom: -1px;
@@ -121,48 +121,39 @@ header {
   justify-content: center;
 }
 
-.titleBlock > p {
+.card .titleBox p {
   padding: 0 22px;
-  font-weight: 400;
   font-size: var(--fs-small);
   text-align: center;
-  line-height: var(--line-height);
   color: var(--white-clr);
 }
 
-.heroText {
+.centerHeroText {
   color: var(--white-clr);
   text-align: center;
 }
 
-.heroText p {
-  font-weight: 400;
+.centerHeroText p {
   font-size: var(--fs-medium);
-  line-height: 30px;
   margin-bottom: 8px;
 }
 
-.heroText h1 {
+.centerHeroText h1 {
   font-weight: bold;
   font-size: var(--fs-medium);
-  line-height: 30px;
 }
-/* HOMEPAGE --> MOVIES & TV SECTION */
-main {
+
+/* MAIN CONTENT */
+.mainContent {
+  /* width is the same as navbar*/
   width: 1230px;
   margin: auto;
 }
 
-h2 {
+.sectionTitle {
   margin-top: 134px;
-  font-weight: bold;
   font-size: var(--fs-medium);
-  line-height: 30px;
-}
-
-.cardItem.heroCard > span {
-  color: var(--white-clr);
-  background-color: #24123a;
+  color: #1a0029;
 }
 
 .movieSection,
@@ -174,19 +165,24 @@ h2 {
   gap: 25px;
 }
 
-.cardItem {
+.mainCard {
   box-shadow: rgba(33, 35, 38, 0.1) 0px 10px 10px -10px;
   margin-top: 45px;
   filter: drop-shadow(0px 0px 25px rgba(0, 0, 0, 0.2));
   border-radius: 4px 0px 4px 4px;
 }
 
-.cardItem-title {
+.mainCard .mainCard-rating {
+  color: var(--white-clr);
+  background-color: #24123a;
+}
+
+.mainCard .mainCard-title {
   background: rgba(36, 18, 58, 0.76);
 }
 
 /* FOOTER */
-footer {
+.footer {
   width: 100%;
   height: 75px;
   background-color: #24123a;
@@ -196,7 +192,7 @@ footer {
   justify-content: space-between;
 }
 
-footer > a {
+.footer .nameLink {
   color: white;
   margin-left: 104px;
   text-decoration: none;
@@ -204,11 +200,11 @@ footer > a {
   line-height: 22px;
 }
 
-footer .contactLinks {
+.footer .contactLinks {
   display: flex;
 }
 
-footer .contactLinks * {
+.footer .contactLinks * {
   font-size: var(--fs-small);
   line-height: 20px;
   margin-left: 28px;
@@ -216,8 +212,6 @@ footer .contactLinks * {
   color: white;
   text-decoration: none;
 }
-footer .contactLinks > li:last-child {
+.footer .contactLinks > li:last-child {
   margin-right: 104px;
 }
-
-/* SCROLL TO TOP BUTTON */
