@@ -1,8 +1,22 @@
-function renderHomepage() {
+function initialHomepageRender() {
   const headerHeroLeft = document.querySelector('.leftHeroCard');
   const headerHeroRight = document.querySelector('.rightHeroCard');
-  const movieSection = document.querySelector('.movieSection');
-  const tvSection = document.querySelector('.tvSection');
+  const main = document.querySelector('.mainContent');
+  const tvSectionTitle = document.createElement('h2');
+  const movieSectionTitle = document.createElement('h2');
+  tvSectionTitle.className = 'sectionTitle';
+  tvSectionTitle.textContent = 'Popular Tv Series';
+  movieSectionTitle.className = 'sectionTitle';
+  movieSectionTitle.textContent = 'Popular Movies';
+
+  const movieSection = document.createElement('section');
+  movieSection.className = 'movieSection';
+  const tvSection = document.createElement('section');
+  tvSection.className = 'tvSection';
+
+  movieSection.append(movieSectionTitle);
+  tvSection.append(tvSectionTitle);
+  main.append(movieSection, tvSection);
 
   const moviesUrl =
     'https://api.themoviedb.org/3/movie/popular?api_key=569ccf1a5cbb5c6658fdd087c1f05771&language=en-US&page=1';
@@ -68,8 +82,7 @@ function renderHomepage() {
       });
     }
 
-    // this function creates new div for each movie or tv-series then,
-    // renders them on their sections.
+    // create new div for each movie or tv-series then render
     function renderMainContent() {
       data.map((list) => {
         const { name, poster_path, vote_average, title } = list;
@@ -82,14 +95,44 @@ function renderHomepage() {
         <p>${name || title}</p>
       </div>
     `;
-        // if fetched json has "title" key, then it is a movie data
         list.title ? movieSection.append(card) : tvSection.append(card);
       });
     }
 
     renderHeroContent();
     renderMainContent();
+    main.classList.add('homeContentActive');
   }
 }
 
-renderHomepage();
+initialHomepageRender();
+
+/* home link click behaviour */
+const main = document.querySelector('.mainContent');
+document.querySelector('#homeLink').addEventListener('click', renderHomepage);
+
+function renderHomepage() {
+  // if we are already in homepage
+  // then do not render anything
+  if (!main.classList.contains('homeContentActive')) {
+    clearMainContent();
+    initialHomepageRender();
+  }
+}
+function clearMainContent() {
+  main.innerHTML = '';
+}
+
+/* fixed navbar */
+const nav = document.querySelector('.navbar');
+let navTop = nav.offsetTop;
+
+function fixedNav() {
+  if (window.scrollY >= navTop) {
+    nav.classList.add('fixedNavbar');
+  } else {
+    nav.classList.remove('fixedNavbar');
+  }
+}
+
+window.addEventListener('scroll', fixedNav);

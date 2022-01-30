@@ -21,6 +21,7 @@ function renderTvMoviesPage() {
     }
 
     if (target === 'tvLink' || target === 'moviesLink') {
+      main.classList.remove('homeContentActive');
       clearMainContent();
       renderFetchedContent();
     }
@@ -104,9 +105,8 @@ function renderTvMoviesPage() {
                 companies || 'information not found'
               }</li>
             </ul>`;
-
+            window.scrollTo(0, 650);
             main.append(cardContainer);
-            window.scrollTo(0, 750);
           })
           .catch((error) => {
             console.error('Error:', error);

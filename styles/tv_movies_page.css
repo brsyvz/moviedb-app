@@ -11,26 +11,25 @@
 
 .mainContent.active {
   display: flex;
-  flex-direction: row;
   width: 1230px;
   flex-wrap: wrap;
+  justify-content: space-between;
 }
 
 .sectionHeader {
-  margin-top: 134px;
-  margin-bottom: 20px;
   font-size: 25px;
   text-align: left;
   color: var(--header-clr);
-  flex-wrap: wrap;
   width: 100%;
+  margin-top: 29px;
 }
 
 .container {
   display: flex;
-  margin: auto;
+  /* parent with --> 1230/2 = 600. + 30 gap*/
   width: 600px;
-  margin-top: 25px;
+  margin-top: 30px;
+
   background-color: var(--card-bg-clr);
   box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px,
     rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
