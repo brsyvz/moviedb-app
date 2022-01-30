@@ -1,57 +1,62 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="description" content="" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <script
+      src="https://kit.fontawesome.com/29c7e0364b.js"
+      crossorigin="anonymous"
+    ></script>
+    <title>Baris Yavuz / tmdb homework</title>
+    <link rel="shortcut icon" href="#" type="image/x-icon" />
+    <link rel="stylesheet" href="./styles/homepage.css" />
+    <link rel="stylesheet" href="./styles/tv_movies_page.css" />
+    <link rel="stylesheet" href="./styles/scroll_to_top.css" />
 
-<head>
-  <meta charset="utf-8" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <meta name="description" content="" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <script src="https://kit.fontawesome.com/29c7e0364b.js" crossorigin="anonymous"></script>
-  <title>Baris Yavuz / tmdb homework</title>
-  <link rel="shortcut icon" href="#" type="image/x-icon" />
-  <link rel="stylesheet" href="./styles/homepage.css" />
-  <link rel="stylesheet" href="./styles/tv_movies_page.css" />
-  <link rel="stylesheet" href="./styles/scroll_to_top.css" />
+    <script src="./scripts/homepage.js" async defer></script>
+    <script src="./scripts/tv_movies_page.js" async defer></script>
+    <script src="./scripts/scroll_to_top.js" async defer></script>
+  </head>
 
-  <script src="./scripts/homepage.js" async defer></script>
-  <script src="./scripts/tv_movies_page.js" async defer></script>
-  <script src="./scripts/scroll_to_top.js" async defer></script>
-</head>
+  <body>
+    <div class="wrapper">
+      <header id="header">
+        <nav class="navbar">
+          <p class="logo">Logo</p>
+          <div class="navLinks">
+            <a id="homeLink" href=""><i class="fas fa-home"></i></a>
+            <a id="tvLink" href="">Popular TV Series</a>
+            <a id="moviesLink" href="">Popular Movies</a>
+          </div>
+        </nav>
 
-<body>
-  <div class="wrapper">
-    <header id="header">
-      <nav class="navbar">
-        <p class="logo">Logo</p>
-        <div class="navLinks">
-          <a id="homeLink" href=""><i class="fas fa-home"></i></a>
-          <a id="tvLink" href="">Popular TV Series</a>
-          <a id="moviesLink" href="">Popular Movies</a>
-        </div>
-      </nav>
+        <section class="headerHeroSection">
+          <div class="card leftHeroCard"></div>
+          <div class="centerHeroText">
+            <p>Welcome to the</p>
+            <h1>World of TV Series & Movies</h1>
+          </div>
+          <div class="card rightHeroCard"></div>
+        </section>
+      </header>
 
-      <section class="headerHeroSection">
-        <div class="card leftHeroCard"></div>
-        <div class="centerHeroText">
-          <p>Welcome to the</p>
-          <h1>World of TV Series & Movies</h1>
-        </div>
-        <div class="card rightHeroCard"></div>
-      </section>
-    </header>
-
-    <main class="mainContent active"></main>
-  </div>
-  <div hidden id="spinner"></div>
-  <footer class="footer">
-    <a class="nameLink" target="_blank" href="https://yavuzbaris.com/">Baris Yavuz</a>
-    <ul class="contactLinks">
-      <li>
-        <a target="_blank" href="https://www.linkedin.com/in/brsyvz/">Linkedln</a>
-      </li>
-      <li><a target="_blank" href="https://github.com/brsyvz">Github</a></li>
-    </ul>
-  </footer>
-</body>
-
+      <main class="mainContent active"></main>
+    </div>
+    <div hidden id="spinner"></div>
+    <footer class="footer">
+      <a class="nameLink" target="_blank" href="https://yavuzbaris.com/"
+        >Baris Yavuz</a
+      >
+      <ul class="contactLinks">
+        <li>
+          <a target="_blank" href="https://www.linkedin.com/in/brsyvz/"
+            >Linkedln</a
+          >
+        </li>
+        <li><a target="_blank" href="https://github.com/brsyvz">Github</a></li>
+      </ul>
+    </footer>
+  </body>
 </html>
