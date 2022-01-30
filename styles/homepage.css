@@ -15,7 +15,6 @@ html {
 
 body {
   font-family: 'Montserrat', sans-serif;
-  /* min-height: 2000px; */
   min-height: 100%;
 }
 
@@ -25,9 +24,11 @@ body {
   padding: 0;
 }
 
+/* wrap and center page content, exclude footer */
 .wrapper {
   max-width: 1440px;
   margin: auto;
+  /*set default height so the footer do not jump to the top when page content updated */
   min-height: 2000px;
 }
 
@@ -64,6 +65,9 @@ header {
   padding-left: 23px;
 }
 
+.activeLink {
+  color: #d7d9e2 !important;
+}
 .fixedNavbar {
   position: fixed;
   left: 0;
@@ -73,15 +77,15 @@ header {
   width: 100%;
   z-index: 999;
   backdrop-filter: none;
-  background: #523f5fde;
+  background: #24123a;
   border-radius: 0;
 }
 
 .fixedNavbar > p {
-  color: #fff;
+  color: #707cb4;
 }
 .fixedNavbar > .navLinks a {
-  color: #fff;
+  color: #707cb4;
   margin-right: 50px;
 }
 
@@ -94,7 +98,7 @@ header {
 }
 
 .navLinks a:hover {
-  color: rgba(255, 255, 255, 0.952);
+  color: #fffffff3;
 }
 
 .headerHeroSection {
@@ -192,14 +196,14 @@ header {
   margin-top: 105px;
 }
 
-.mainCard {
+.card.mainCard {
   box-shadow: rgba(33, 35, 38, 0.1) 0px 10px 10px -10px;
   margin-top: 45px;
   filter: drop-shadow(0px 0px 25px rgba(0, 0, 0, 0.2));
   border-radius: 4px 0px 4px 4px;
 }
 
-.mainCard .mainCard-rating {
+.card.mainCard .mainCard-rating {
   color: var(--white-clr);
   background-color: #24123a;
 }
@@ -221,7 +225,7 @@ header {
 }
 
 .footer .nameLink {
-  color: white;
+  color: #ffffff;
   margin-left: 104px;
   text-decoration: none;
   font-size: 18px;
@@ -237,7 +241,7 @@ header {
   line-height: 20px;
   margin-left: 28px;
   list-style-type: none;
-  color: white;
+  color: #ffffff;
   text-decoration: none;
 }
 .footer .contactLinks > li:last-child {

@@ -7,27 +7,37 @@ function renderTvMoviesPage() {
   // "movie" or "tv"
   let urlExtension = '';
 
-  const navLinks = document.querySelector('.navLinks');
-  navLinks.addEventListener('click', (e) => {
-    e.preventDefault();
+  function handleNavlinks() {
+    const navLinks = document.querySelector('.navLinks');
+    navLinks.addEventListener('click', (e) => {
+      e.preventDefault();
 
-    let target = e.target.id;
+      const [firstClassName] = e.target.className.split(' ');
 
-    if (target === 'tvLink') {
-      urlExtension = 'tv';
-    }
-    if (target === 'moviesLink') {
-      urlExtension = 'movie';
-    }
+      urlExtension = firstClassName;
 
-    if (target === 'tvLink' || target === 'moviesLink') {
-      main.classList.remove('homeContentActive');
-      clearMainContent();
-      renderFetchedContent();
-    }
-  });
+      // get all link elements
+      let links = navLinks.getElementsByClassName('links');
+
+      // remove all active links
+      for (let i = 0; i < links.length; i++) {
+        links[i].classList.remove('activeLink');
+      }
+
+      // current active link = clicked link.
+      e.target.classList.add('activeLink');
+
+      if (urlExtension === 'tv' || urlExtension === 'movie') {
+        main.classList.remove('homeContentActive');
+        clearMainContent();
+        renderFetchedContent();
+      }
+    });
+  }
+  handleNavlinks();
 
   function clearMainContent() {
+    window.scrollTo(0, 700);
     main.innerHTML = '';
     main.append(sectionHeader);
   }
@@ -35,13 +45,13 @@ function renderTvMoviesPage() {
   function renderFetchedContent() {
     let currentUrl = `https://api.themoviedb.org/3/${urlExtension}/popular?api_key=569ccf1a5cbb5c6658fdd087c1f05771&language=en-US&page=1`;
 
+    // fetch data and pass to the renderPopular function
     async function fetchMovieOrTvData(url) {
       const res = await fetch(url);
       const data = await res.json();
       renderPopular(data.results);
     }
-
-    // render popular movies or tv series depend on link click.
+    // use passed  data
     function renderPopular(data) {
       data.map((items) => {
         let {
@@ -81,7 +91,8 @@ function renderTvMoviesPage() {
             for (let i = 0; i < data.production_companies.length; i++) {
               companies += data.production_companies[i].name + ', ';
             }
-
+            // create new div for each movie/tv item
+            //
             const cardContainer = document.createElement('div');
             cardContainer.className = 'container';
             cardContainer.innerHTML = `
@@ -105,7 +116,7 @@ function renderTvMoviesPage() {
                 companies || 'information not found'
               }</li>
             </ul>`;
-            window.scrollTo(0, 650);
+
             main.append(cardContainer);
           })
           .catch((error) => {
@@ -113,6 +124,7 @@ function renderTvMoviesPage() {
           });
       });
     }
+
     fetchMovieOrTvData(currentUrl);
   }
 }

@@ -1,4 +1,4 @@
-function initialHomepageRender() {
+function homePage() {
   const headerHeroLeft = document.querySelector('.leftHeroCard');
   const headerHeroRight = document.querySelector('.rightHeroCard');
   const main = document.querySelector('.mainContent');
@@ -98,41 +98,47 @@ function initialHomepageRender() {
         list.title ? movieSection.append(card) : tvSection.append(card);
       });
     }
-
     renderHeroContent();
     renderMainContent();
     main.classList.add('homeContentActive');
   }
 }
 
-initialHomepageRender();
+homePage();
 
-/* home link click behaviour */
-const main = document.querySelector('.mainContent');
-document.querySelector('#homeLink').addEventListener('click', renderHomepage);
+function handleHomeClick() {
+  const main = document.querySelector('.mainContent');
+  const homelink = document.querySelector('.home');
+  homelink.addEventListener('click', renderHomepageContent);
 
-function renderHomepage() {
-  // if we are already in homepage
-  // then do not render anything
-  if (!main.classList.contains('homeContentActive')) {
-    clearMainContent();
-    initialHomepageRender();
+  function renderHomepageContent() {
+    // if we are already in homepage
+    // then do not render homepage
+    if (!homelink.classList.contains('activeLink')) {
+      clearMainContent();
+      homePage();
+    }
+  }
+  function clearMainContent() {
+    main.innerHTML = '';
   }
 }
-function clearMainContent() {
-  main.innerHTML = '';
-}
+handleHomeClick();
 
 /* fixed navbar */
-const nav = document.querySelector('.navbar');
-let navTop = nav.offsetTop;
+function handleFixedNavbar() {
+  const nav = document.querySelector('.navbar');
+  let navTop = nav.offsetTop;
 
-function fixedNav() {
-  if (window.scrollY >= navTop) {
-    nav.classList.add('fixedNavbar');
-  } else {
-    nav.classList.remove('fixedNavbar');
+  function fixedNav() {
+    if (window.scrollY >= navTop) {
+      nav.classList.add('fixedNavbar');
+    } else {
+      nav.classList.remove('fixedNavbar');
+    }
   }
+
+  window.addEventListener('scroll', fixedNav);
 }
 
-window.addEventListener('scroll', fixedNav);
+handleFixedNavbar();
