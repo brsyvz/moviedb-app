@@ -115,6 +115,9 @@ header {
   height: 417px;
   filter: drop-shadow(0px 0px 25px rgba(0, 0, 0, 0.57));
   border-radius: 4px 0px 4px 4px;
+  animation: fadeInAnimation ease 0.5s;
+  animation-iteration-count: 1;
+  animation-fill-mode: forwards;
 }
 
 .card img {
