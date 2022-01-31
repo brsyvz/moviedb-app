@@ -83,10 +83,14 @@ header {
 
 .fixedNavbar > p {
   color: #707cb4;
+  margin-left: 145px;
 }
 .fixedNavbar > .navLinks a {
   color: #707cb4;
-  margin-right: 50px;
+}
+
+.fixedNavbar > .navLinks:last-child {
+  margin-right: 145px;
 }
 
 .navLinks a {

@@ -100,7 +100,6 @@ function homePage() {
     }
     renderHeroContent();
     renderMainContent();
-    main.classList.add('homeContentActive');
   }
 }
 

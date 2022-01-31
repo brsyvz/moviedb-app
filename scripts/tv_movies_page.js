@@ -4,37 +4,35 @@ function renderTvMoviesPage() {
   sectionHeader.className = 'sectionHeader';
   const imgUrl = 'https://image.tmdb.org/t/p/w300/';
 
-  // "movie" or "tv"
   let urlExtension = '';
 
-  function handleNavlinks() {
+  // when click on nav links,
+  // set urlExtension to "tv", "movie" or "home" and,
+  // render page content by using urlExtention (tv or movie data),
+  // + render page content only once (prevent spam)
+  // + display currently active link
+  function handleTvAndMovieLinks() {
     const navLinks = document.querySelector('.navLinks');
     navLinks.addEventListener('click', (e) => {
       e.preventDefault();
-
       const [firstClassName] = e.target.className.split(' ');
-
       urlExtension = firstClassName;
-
-      // get all link elements
-      let links = navLinks.getElementsByClassName('links');
-
-      // remove all active links
-      for (let i = 0; i < links.length; i++) {
-        links[i].classList.remove('activeLink');
-      }
-
-      // current active link = clicked link.
-      e.target.classList.add('activeLink');
-
-      if (urlExtension === 'tv' || urlExtension === 'movie') {
-        main.classList.remove('homeContentActive');
+      if (
+        !e.target.classList.contains('activeLink') &&
+        !e.target.classList.contains('home')
+      ) {
         clearMainContent();
         renderFetchedContent();
       }
+      let links = navLinks.getElementsByClassName('links');
+      for (let i = 0; i < links.length; i++) {
+        links[i].classList.remove('activeLink');
+      }
+      e.target.classList.add('activeLink');
     });
   }
-  handleNavlinks();
+
+  handleTvAndMovieLinks();
 
   function clearMainContent() {
     window.scrollTo(0, 700);
