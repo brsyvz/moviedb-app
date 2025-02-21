@@ -69,6 +69,7 @@ if (filteredByRating.length > 0) {
     } else if (name) {
  headerHeroLeft.innerHTML = `
         <img src="${imgUrl + poster_path}" alt="${title}" />
+        console.log(vote_average)
      <span>${(vote_average / 10).toFixed(1)} / 10</span>
         <div class="titleBox">
           <p>${title}</p>
