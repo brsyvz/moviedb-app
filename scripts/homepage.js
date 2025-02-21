@@ -57,29 +57,35 @@ function homePage() {
         }
       });
 
-      let randomItem =
-        filteredByRating[Math.floor(Math.random() * filteredByRating.length)];
-
-      [randomItem].map((cards) => {
-        const { title, name, poster_path, vote_average } = cards;
-        if (cards.title) {
-          headerHeroLeft.innerHTML = `
+  // Check if filteredByRating has any items before selecting a random one
+if (filteredByRating.length > 0) {
+  let randomItem = filteredByRating[Math.floor(Math.random() * filteredByRating.length)];
+  
+  if (randomItem) {
+    const { title, name, poster_path, vote_average } = randomItem;
+    
+    if (title) {
+      headerHeroLeft.innerHTML = `
         <img src="${imgUrl + poster_path}" alt="${title}" />
-        <span>${vote_average} / 10</span>
+        <span>${(vote_average / 10).toFixed(1)} / 10</span>
         <div class="titleBox">
           <p>${title}</p>
         </div>
       `;
-        } else if (cards.name) {
-          headerHeroRight.innerHTML = `
+    } else if (name) {
+      headerHeroRight.innerHTML = `
         <img src="${imgUrl + poster_path}" alt="${name}" />
-        <span>${vote_average} / 10</span>
+        <span>${(vote_average / 10).toFixed(1)} / 10</span>
         <div class="titleBox">
           <p>${name}</p>
         </div>
       `;
-        }
-      });
+    }
+  }
+} else {
+  console.warn("filteredByRating is empty.");
+}
+
     }
 
     // create new div for each movie or tv-series then render
