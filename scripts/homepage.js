@@ -69,7 +69,7 @@ if (filteredByRating.length > 0) {
     } else if (name) {
  headerHeroLeft.innerHTML = `
         <img src="${imgUrl + poster_path}" alt="${title}" />
-        <span>${(vote_average / 10).toFixed(1)} / 10</span>
+     <span>${(vote_average / 10).toFixed(1)} / 10</span>
         <div class="titleBox">
           <p>${title}</p>
         </div>
@@ -77,7 +77,7 @@ if (filteredByRating.length > 0) {
 
       headerHeroRight.innerHTML = `
         <img src="${imgUrl + poster_path}" alt="${name}" />
-        <span>${(vote_average / 10).toFixed(1)} / 10</span>
+   <span>${(vote_average / 10).toFixed(1)} / 10</span>
         <div class="titleBox">
           <p>${name}</p>
         </div>
