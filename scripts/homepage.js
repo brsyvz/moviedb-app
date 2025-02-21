@@ -65,14 +65,16 @@ if (filteredByRating.length > 0) {
     const { title, name, poster_path, vote_average } = randomItem;
     
     if (title) {
-      headerHeroLeft.innerHTML = `
+     
+    } else if (name) {
+ headerHeroLeft.innerHTML = `
         <img src="${imgUrl + poster_path}" alt="${title}" />
         <span>${(vote_average / 10).toFixed(1)} / 10</span>
         <div class="titleBox">
           <p>${title}</p>
         </div>
       `;
-    } else if (name) {
+
       headerHeroRight.innerHTML = `
         <img src="${imgUrl + poster_path}" alt="${name}" />
         <span>${(vote_average / 10).toFixed(1)} / 10</span>
@@ -85,7 +87,6 @@ if (filteredByRating.length > 0) {
 } else {
   console.warn("filteredByRating is empty.");
 }
-
     }
 
     // create new div for each movie or tv-series then render
