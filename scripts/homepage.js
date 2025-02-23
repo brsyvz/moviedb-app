@@ -70,7 +70,7 @@ if (filteredByRating.length > 0) {
  headerHeroLeft.innerHTML = `
         <img src="${imgUrl + poster_path}" alt="${title}" />
         console.log(vote_average)
-     <span>${(vote_average / 10).toFixed(1)} / 10</span>
+     <span>${(vote_average / 10)} / 10</span>
         <div class="titleBox">
           <p>${title}</p>
         </div>
