@@ -1,4 +1,4 @@
-function homePage() {
+ function homePage() {
   const headerHeroLeft = document.querySelector(".leftHeroCard");
   const headerHeroRight = document.querySelector(".rightHeroCard");
   const main = document.querySelector(".mainContent");
