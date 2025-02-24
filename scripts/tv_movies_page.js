@@ -1,129 +1,155 @@
-function renderTvMoviesPage() {
+function homePage() {
+  const headerHeroLeft = document.querySelector('.leftHeroCard');
+  const headerHeroRight = document.querySelector('.rightHeroCard');
   const main = document.querySelector('.mainContent');
-  let sectionHeader = document.createElement('h3');
-  sectionHeader.className = 'sectionHeader';
+  const tvSectionTitle = document.createElement('h2');
+  const movieSectionTitle = document.createElement('h2');
+  tvSectionTitle.className = 'sectionTitle';
+  tvSectionTitle.textContent = 'Popular Tv Series';
+  movieSectionTitle.className = 'sectionTitle';
+  movieSectionTitle.textContent = 'Popular Movies';
+
+  const movieSection = document.createElement('section');
+  movieSection.className = 'movieSection';
+  const tvSection = document.createElement('section');
+  tvSection.className = 'tvSection';
+
+  movieSection.append(movieSectionTitle);
+  tvSection.append(tvSectionTitle);
+  main.append(movieSection, tvSection);
+
+  const moviesUrl =
+    'https://api.themoviedb.org/3/movie/popular?api_key=569ccf1a5cbb5c6658fdd087c1f05771&language=en-US&page=1';
+
+  const tvSeriesUrl =
+    'https://api.themoviedb.org/3/tv/popular?api_key=569ccf1a5cbb5c6658fdd087c1f05771&language=en-US&page=1';
+
   const imgUrl = 'https://image.tmdb.org/t/p/w300/';
 
-  let urlExtension = '';
+  // Pass the URL variables to the fetch functions
+  fetchMovies(moviesUrl);
+  fetchTvSeries(tvSeriesUrl);
 
-  // when click on nav links,
-  // set urlExtension to "tv", "movie" or "home" and,
-  // render page content by using urlExtention (tv or movie data),
-  // + render page content only once (prevent spam)
-  // + display currently active link
-  function handleTvAndMovieLinks() {
-    const navLinks = document.querySelector('.navLinks');
-    navLinks.addEventListener('click', (e) => {
-      e.preventDefault();
-      const [firstClassName] = e.target.className.split(' ');
-      urlExtension = firstClassName;
-      if (
-        !e.target.classList.contains('activeLink') &&
-        !e.target.classList.contains('home')
-      ) {
-        clearMainContent();
-        renderFetchedContent();
-      }
-      let links = navLinks.getElementsByClassName('links');
-      for (let i = 0; i < links.length; i++) {
-        links[i].classList.remove('activeLink');
-      }
-      e.target.classList.add('activeLink');
-    });
+  // Fetch movies data and pass it to the useFetchedData function
+  async function fetchMovies(url) {
+    const res = await fetch(url);
+    const data = await res.json();
+    useFetchedData(data.results);
+  }
+  
+  // Fetch TV series data and pass it to the useFetchedData function
+  async function fetchTvSeries(url) {
+    const res = await fetch(url);
+    const data = await res.json();
+    useFetchedData(data.results);
   }
 
-  handleTvAndMovieLinks();
+  function useFetchedData(data) {
+    // This function filters fetched movie and tv series depend on rating > 8, then...
+    // Renders the single movie and tv-series randomly on header section
+    function renderHeroContent() {
+      let filteredByRating = [];
+      data.map((el) => {
+        const { name, vote_average, title } = el;
+        if (vote_average >= 8 && title) {
+          filteredByRating.push(el);
+        } else if (vote_average >= 8 && name) {
+          filteredByRating.push(el);
+        }
+      });
 
-  function clearMainContent() {
-    window.scrollTo(0, 700);
-    main.innerHTML = '';
-    main.append(sectionHeader);
-  }
+      // Check if filteredByRating has any items before selecting a random one
+      if (filteredByRating.length > 0) {
+        let randomItem = filteredByRating[Math.floor(Math.random() * filteredByRating.length)];
 
-  function renderFetchedContent() {
-    let currentUrl = `https://api.themoviedb.org/3/${urlExtension}/popular?api_key=569ccf1a5cbb5c6658fdd087c1f05771&language=en-US&page=1`;
+        if (randomItem) {
+          const { title, name, poster_path, vote_average } = randomItem;
+          
+          // Round vote_average to one decimal place using Math.round()
+          const roundedVoteAverage = Math.round(vote_average * 10) / 10;
 
-    // fetch data and pass to the renderPopular function
-    async function fetchMovieOrTvData(url) {
-      const res = await fetch(url);
-      const data = await res.json();
-      renderPopular(data.results);
+          if (title) {
+            headerHeroLeft.innerHTML = `
+              <img src="${imgUrl + poster_path}" alt="${title}" />
+              <span>${roundedVoteAverage} / 10</span>
+              <div class="titleBox">
+                <p>${title}</p>
+              </div>
+            `;
+          } else if (name) {
+            headerHeroRight.innerHTML = `
+              <img src="${imgUrl + poster_path}" alt="${name}" />
+              <span>${roundedVoteAverage} / 10</span>
+              <div class="titleBox">
+                <p>${name}</p>
+              </div>
+            `;
+          }
+        }
+      } else {
+        console.warn("filteredByRating is empty.");
+      }
     }
-    // use passed  data
-    function renderPopular(data) {
-      data.map((items) => {
-        let {
-          id,
-          poster_path,
-          vote_average,
-          title,
-          overview,
-          release_date,
-          first_air_date,
-          name,
-        } = items;
-        let genres = '';
-        let castMembers = '';
-        let companies = '';
 
-        // request for extracting extra movie details by using each movie id
-        // extracts genres, cast and  production companies
-        fetch(
-          `https://api.themoviedb.org/3/${urlExtension}/${id}?api_key=569ccf1a5cbb5c6658fdd087c1f05771&language=en-US&append_to_response=credits`
-        )
-          .then((response) => response.json())
-          .then((data) => {
-            urlExtension === 'movie'
-              ? (sectionHeader.textContent = 'Popular Movies')
-              : (sectionHeader.textContent = 'Popular TV Series');
+    // Create new div for each movie or TV series then render
+    function renderMainContent() {
+      data.map((list) => {
+        const { name, poster_path, vote_average, title } = list;
+        
+        // Round vote_average to one decimal place using Math.round()
+        const roundedVoteAverage = Math.round(vote_average * 10) / 10;
 
-            for (let i = 0; i < data.genres.length; i++) {
-              genres += data.genres[i].name + ', ';
-            }
-            for (let i = 0; i < 4; i++) {
-              if (data.credits.cast[i] === undefined) {
-                continue;
-              }
-              castMembers += data.credits.cast[i].name + ', ';
-            }
-            for (let i = 0; i < data.production_companies.length; i++) {
-              companies += data.production_companies[i].name + ', ';
-            }
-            // create new div for each movie/tv item
-            //
-            const cardContainer = document.createElement('div');
-            cardContainer.className = 'container';
-            cardContainer.innerHTML = `
-            <img src="${imgUrl + poster_path}" alt="${title || name}"/>
-             <ul class="infoDiv">
-              <li class="cardTitle">${title || name}</li>
-              <li class="rating">${vote_average}</li>
-              <li class="releaseYear">${
-                release_date
-                  ? release_date.slice(0, 4)
-                  : release_date || first_air_date.slice(0, 4)
-              }
-              </li>
-              <li class="genre"><span class="contentTitles">Genre</span>${genres}</li>
-              <li class="summary">
-              <span class="contentTitles">Summary</span>${
-                overview || 'information not found.'
-              }</li>
-              <li class="cast"><span class="contentTitles">Cast</span>${castMembers}</li>
-              <li class="companies"><span class="contentTitles">Producer</span>${
-                companies || 'information not found'
-              }</li>
-            </ul>`;
-
-            main.append(cardContainer);
-          })
-          .catch((error) => {
-            console.error('Error:', error);
-          });
+        const card = document.createElement('div');
+        card.classList.add('card', 'mainCard');
+        card.innerHTML = ` 
+          <img src="${imgUrl + poster_path}" alt="${name || title}" />
+          <span class="mainCard-rating">${roundedVoteAverage} / 10</span>
+          <div class="titleBox mainCard-title">
+            <p>${name || title}</p>
+          </div>
+        `;
+        list.title ? movieSection.append(card) : tvSection.append(card);
       });
     }
-
-    fetchMovieOrTvData(currentUrl);
+    renderHeroContent();
+    renderMainContent();
   }
 }
-renderTvMoviesPage();
+
+homePage();
+
+function handleHomeClick() {
+  const main = document.querySelector('.mainContent');
+  const homelink = document.querySelector('.home');
+  homelink.addEventListener('click', renderHomepageContent);
+
+  function renderHomepageContent() {
+    // If we are already in homepage then do not render homepage
+    if (!homelink.classList.contains('activeLink')) {
+      clearMainContent();
+      homePage();
+    }
+  }
+  function clearMainContent() {
+    main.innerHTML = '';
+  }
+}
+handleHomeClick();
+
+/* Fixed navbar */
+function handleFixedNavbar() {
+  const nav = document.querySelector('.navbar');
+  let navTop = nav.offsetTop;
+
+  function fixedNav() {
+    if (window.scrollY >= navTop) {
+      nav.classList.add('fixedNavbar');
+    } else {
+      nav.classList.remove('fixedNavbar');
+    }
+  }
+
+  window.addEventListener('scroll', fixedNav);
+}
+
+handleFixedNavbar();
