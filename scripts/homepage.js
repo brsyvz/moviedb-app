@@ -96,7 +96,7 @@ if (filteredByRating.length > 0) {
         card.classList.add('card', 'mainCard');
         card.innerHTML = ` 
       <img src="${imgUrl + poster_path}" alt="${name || title}" />
-      <span class="mainCard-rating">${(vote_average / 10).toFixed(1)}</span>
+      <span class="mainCard-rating">${(vote_average / 10)}</span>
       <div class="titleBox mainCard-title">
         <p>${name || title}</p>
       </div>
