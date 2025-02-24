@@ -64,9 +64,7 @@ if (filteredByRating.length > 0) {
   if (randomItem) {
     const { title, name, poster_path, vote_average } = randomItem;
     
-    if (title) {
-     
-    } else if (name) {
+    if (name) {
  headerHeroLeft.innerHTML = `
         <img src="${imgUrl + poster_path}" alt="${title}" />
         console.log(vote_average)
@@ -78,7 +76,7 @@ if (filteredByRating.length > 0) {
 
       headerHeroRight.innerHTML = `
         <img src="${imgUrl + poster_path}" alt="${name}" />
-   <span>${(vote_average / 10).toFixed(1)} / 10</span>
+   <span>${(vote_average / 10)} / 10</span>
         <div class="titleBox">
           <p>${name}</p>
         </div>
