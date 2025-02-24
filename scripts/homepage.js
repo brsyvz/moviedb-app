@@ -68,7 +68,7 @@ if (filteredByRating.length > 0) {
  headerHeroLeft.innerHTML = `
         <img src="${imgUrl + poster_path}" alt="${title}" />
         console.log(vote_average)
-     <span>${(vote_average / 10)} / 10</span>
+     <span>${(vote_average)}</span>
         <div class="titleBox">
           <p>${title}</p>
         </div>
@@ -76,7 +76,7 @@ if (filteredByRating.length > 0) {
 
       headerHeroRight.innerHTML = `
         <img src="${imgUrl + poster_path}" alt="${name}" />
-   <span>${(vote_average / 10)} / 10</span>
+   <span>${(vote_average)}</span>
         <div class="titleBox">
           <p>${name}</p>
         </div>
@@ -96,7 +96,7 @@ if (filteredByRating.length > 0) {
         card.classList.add('card', 'mainCard');
         card.innerHTML = ` 
       <img src="${imgUrl + poster_path}" alt="${name || title}" />
-      <span class="mainCard-rating">${(vote_average / 10)}</span>
+      <span class="mainCard-rating">${(vote_average)}</span>
       <div class="titleBox mainCard-title">
         <p>${name || title}</p>
       </div>
