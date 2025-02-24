@@ -26,17 +26,18 @@ function homePage() {
 
   const imgUrl = 'https://image.tmdb.org/t/p/w300/';
 
-  // pass the url variables to the fetch functions
+  // Pass the URL variables to the fetch functions
   fetchMovies(moviesUrl);
   fetchTvSeries(tvSeriesUrl);
 
-  // gets movie data and passes it to the useFetchedData function.
+  // Fetch movies data and pass it to the useFetchedData function
   async function fetchMovies(url) {
     const res = await fetch(url);
     const data = await res.json();
     useFetchedData(data.results);
   }
-  // gets tv series data and passes it to the useFetchedData function.
+  
+  // Fetch TV series data and pass it to the useFetchedData function
   async function fetchTvSeries(url) {
     const res = await fetch(url);
     const data = await res.json();
@@ -44,8 +45,8 @@ function homePage() {
   }
 
   function useFetchedData(data) {
-    // this function filters fetched movie and tv series depend on rating > 8, then...
-    // renders the single movie and tv-serie randomly on header section
+    // This function filters fetched movie and tv series depend on rating > 8, then...
+    // Renders the single movie and tv-series randomly on header section
     function renderHeroContent() {
       let filteredByRating = [];
       data.map((el) => {
@@ -57,49 +58,56 @@ function homePage() {
         }
       });
 
-  // Check if filteredByRating has any items before selecting a random one
-if (filteredByRating.length > 0) {
-  let randomItem = filteredByRating[Math.floor(Math.random() * filteredByRating.length)];
-  
-  if (randomItem) {
-    const { title, name, poster_path, vote_average } = randomItem;
-    
-    if (name) {
-      headerHeroLeft.innerHTML = `
-        <img src="${imgUrl + poster_path}" alt="${title}" />
-        <span>${(vote_average)}</span>
-        <div class="titleBox">
-          <p>${title}</p>
-        </div>
-      `;
+      // Check if filteredByRating has any items before selecting a random one
+      if (filteredByRating.length > 0) {
+        let randomItem = filteredByRating[Math.floor(Math.random() * filteredByRating.length)];
 
-      headerHeroRight.innerHTML = `
-        <img src="${imgUrl + poster_path}" alt="${name}" />
-        <span>${(vote_average)}</span>
-        <div class="titleBox">
-          <p>${name}</p>
-        </div>
-      `;
-    }
-  }
-} else {
-  console.warn("filteredByRating is empty.");
-}
+        if (randomItem) {
+          const { title, name, poster_path, vote_average } = randomItem;
+          
+          // Round vote_average to one decimal place
+          const roundedVoteAverage = parseFloat(vote_average.toFixed(1));
+
+          if (title) {
+            headerHeroLeft.innerHTML = `
+              <img src="${imgUrl + poster_path}" alt="${title}" />
+              <span>${roundedVoteAverage} / 10</span>
+              <div class="titleBox">
+                <p>${title}</p>
+              </div>
+            `;
+          } else if (name) {
+            headerHeroRight.innerHTML = `
+              <img src="${imgUrl + poster_path}" alt="${name}" />
+              <span>${roundedVoteAverage} / 10</span>
+              <div class="titleBox">
+                <p>${name}</p>
+              </div>
+            `;
+          }
+        }
+      } else {
+        console.warn("filteredByRating is empty.");
+      }
     }
 
-    // create new div for each movie or tv-series then render
+    // Create new div for each movie or TV series then render
     function renderMainContent() {
       data.map((list) => {
         const { name, poster_path, vote_average, title } = list;
+        
+        // Round vote_average to one decimal place
+        const roundedVoteAverage = parseFloat(vote_average.toFixed(1));
+
         const card = document.createElement('div');
         card.classList.add('card', 'mainCard');
         card.innerHTML = ` 
-      <img src="${imgUrl + poster_path}" alt="${name || title}" />
-      <span class="mainCard-rating">${(vote_average)}</span>
-      <div class="titleBox mainCard-title">
-        <p>${name || title}</p>
-      </div>
-    `;
+          <img src="${imgUrl + poster_path}" alt="${name || title}" />
+          <span class="mainCard-rating">${roundedVoteAverage} / 10</span>
+          <div class="titleBox mainCard-title">
+            <p>${name || title}</p>
+          </div>
+        `;
         list.title ? movieSection.append(card) : tvSection.append(card);
       });
     }
@@ -116,8 +124,7 @@ function handleHomeClick() {
   homelink.addEventListener('click', renderHomepageContent);
 
   function renderHomepageContent() {
-    // if we are already in homepage
-    // then do not render homepage
+    // If we are already in homepage then do not render homepage
     if (!homelink.classList.contains('activeLink')) {
       clearMainContent();
       homePage();
@@ -129,7 +136,7 @@ function handleHomeClick() {
 }
 handleHomeClick();
 
-/* fixed navbar */
+/* Fixed navbar */
 function handleFixedNavbar() {
   const nav = document.querySelector('.navbar');
   let navTop = nav.offsetTop;
